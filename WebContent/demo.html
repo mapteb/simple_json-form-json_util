@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<title>Pizza Order Form</title>
+<head>
+<!-- Bootstrap core CSS -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<SCRIPT src="https://code.jquery.com/jquery-1.12.4.min.js"></SCRIPT>
+<SCRIPT src="/SiteBuilderApp/jq2way3/iter_h/js/submitForm.js"></SCRIPT>
+<SCRIPT src="/SiteBuilderApp/jq2way3/iter_h/js/buildForm.js"></SCRIPT>
+<SCRIPT src="/SiteBuilderApp/jq2way3/iter_h/js/initFormValues.js"></SCRIPT>
+
+
+<style>
+/* begin bootstrap download suggested styles */
+
+h4 {
+  margin-top: 25px;
+}
+.row {
+  margin-bottom: 20px;
+}
+.row .row {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+[class*="col-"] {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #eee;
+  background-color: rgba(86,61,124,.15);
+  border: 1px solid #ddd;
+  border: 1px solid rgba(86,61,124,.2);
+}
+
+hr {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+/* end bootstrap download suggested styles */
+
+
+
+body {
+	height: 100%;
+	width: 100%;
+	font-size: 12px;
+}
+
+.container {
+	height: 100%;
+	width: 100%;
+	_position: fixed;
+}
+
+.bot {
+	height: 100%;
+	bottom: 0;
+}
+
+.hdrimg {
+	background: url('/SiteBuilderApp/assets/img/hdrimg.png') no-repeat;
+}
+
+.row {
+	_height: 30px;
+}
+</style>
+<script type="text/javascript">
+$( function(){
+
+	//builds dropdown/checkbox/radio options 
+	var buildFormJsonObj = JSON.parse($("#model2buildForm").text());
+	$("#buildForm").on('click', function(){
+		buildForm(buildFormJsonObj);
+	});
+	
+	//initializes form values
+	var initFormJsonObj = JSON.parse($("#data2form").text());
+	$("#initializeForm").on('click', function(){
+		initFormVals(initFormJsonObj);
+	});
+	
+	//generates JSON when form is submitted
+	$("#btnId").click( function(){
+		var jsonObj2 = submitForm();
+		$("#form2data").text(JSON.stringify(jsonObj2));
+	});
+	
+    //on reset reload page
+    $("#resetBtn").click( function(){
+		window.location.href=window.location.address;
+	});
+			
+	
+	
+	
+});
+</script>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+
+		<div class="row">
+
+
+			<div class="col-md-12">An example usage of the json-form-json util</div>
+			<div class="col-md-2">
+
+				<a id="buildForm" href="#">1. Build the form</a>
+				<p />
+				<a href="#" id="initializeForm">2. Initialize the form</a>
+				<p />
+				3. Make some changes to the form values and submit the form
+
+			</div>
+			<div class="col-md-6">
+				<h5>Pizza Order Form</h5>
+					<form name="bb" id="mdlRoot" action="#" method="get">
+						<div class="row" style="height: 40px;">
+							<div class="col-md-6" style="height: 100px;">
+								<strong>Name:</strong> 
+								<INPUT class="frmElemCls" type="text" name="userName"
+									id="userName" value="" />&nbsp;
+								<p/>
+								&nbsp;
+								<p/>	
+							</div>
+							<div class="col-md-6" style="height: 100px;">
+								<strong>Address:</strong><br/>
+								<textarea name="address" class="frmElemCls" rows="2" cols="20"></textarea>
+							</div>
+						</div>
+						<div class="row">
+								<div class="col-md-12">
+									<br /> <strong>Toppings:</strong> 
+									<input type="checkbox" class="frmElemCls"
+										name="toppings" value=""/> 
+										
+								</div>		
+								<div class="col-md-12">
+										<strong>Size:</strong> 
+										<input
+										type="radio" class="frmElemCls" name="size" value=""/>
+									
+								</div>
+							<div class="col-md-6">
+								<strong>Sides:</strong> <br/>
+								<select class="frmElemCls" name="sides" multiple>
+									<option></option>
+								</select> <br /> <br />
+							</div>
+							<div class="col-md-6">
+								<input type="button" name="btn" id="btnId" value="Submit Order" />
+								&nbsp;
+								<input type="button" id="resetBtn" name="ResetBtn" value="Reset" />
+								<br />
+								<br />
+							</div>
+						</div>
+					</form>
+			</div>
+			<div class="col-md-4">
+			
+							<h5>Model to build the form</h5>
+				<div id="model2buildForm" _style="display:none;">{ "toppings":
+					[{ "name": "olives", "value": "MUS" }, { "name": "mushroom",
+					"value": "OLV" }, { "name": "pepperoni","value": "PEP" }], "size":
+					[{ "name": "Large",
+					"value": "LG" }, { "name": "Medium","value": "MD" }, { "name":
+					"Small","value": "SM" }], "sides": [{ "name": "Garlic Bread",
+					"value": "GBR" }, { "name": "Beer", "value": "BEER" }, { "name":
+					"Salad","value": "SL" }] }</div>
+
+				<h5>Data to initialize the form</h5>
+				<div id="data2form" _style="display:none;">
+				{"userName":"foo bar","address":"123 myway, 12345","toppings":["MUS","PEP"],"size":"LG","sides":["GBR","BEER"]}
+				</div>
+				
+				<h5>Data submitted from the form</h5>
+				<div id="form2data" _style="display:none;"></div>
+			
+			</div>
+			<!-- div class="col-md-12">
+				Footer bar
+				<p />
+				Footer bar
+				<p />
+			</div -->
+		</div>
+
+	</div>
+	<!-- /container -->
+
+
+
+
+</body>
+</html>
